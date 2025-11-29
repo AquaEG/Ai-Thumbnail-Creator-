@@ -1,0 +1,5 @@
+{
+  "name": "AI Thumbnail Builder",
+  "description": "A powerful 3-column React application for generating and refining YouTube, Shorts, and Reels thumbnails using Google Gemini models.",
+  "requestFramePermissions": []
+}
