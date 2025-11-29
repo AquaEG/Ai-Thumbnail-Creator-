@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { 
   ThumbnailConfig, 
@@ -217,7 +218,14 @@ const App: React.FC = () => {
     
     const link = document.createElement('a');
     link.href = imageUrl;
-    link.download = `neothumb-${Date.now()}.png`;
+    
+    // Generate filename based on video title if available, otherwise timestamp
+    const cleanTitle = config.video_title 
+      ? config.video_title.replace(/[^a-z0-9]/gi, '-').toLowerCase().substring(0, 50)
+      : 'neothumb';
+    
+    link.download = `${cleanTitle}-${Date.now()}.png`;
+    
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -606,7 +614,7 @@ const App: React.FC = () => {
                                 <Key className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-zinc-600" />
                                 <input 
                                     type="password" 
-                                    className="w-full bg-gray-100 dark:bg-black border border-gray-300 dark:border-zinc-800 rounded p-3 pl-10 text-sm font-mono text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                                    className="w-full bg-gray-100 dark:bg-black border border-gray-300 dark:border-zinc-800 rounded p-3 pl-10 text-sm font-mono text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
                                     placeholder="AIza..."
                                     value={tempApiKey}
                                     onChange={(e) => setTempApiKey(e.target.value)}
